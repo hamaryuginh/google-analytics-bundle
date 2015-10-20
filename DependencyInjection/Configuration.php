@@ -25,6 +25,9 @@ class Configuration implements ConfigurationInterface
                 ->scalarNode('account')
                     ->isRequired()
                 ->end()
+                ->booleanNode('debug')
+                    ->defaultValue(false)
+                ->end()
             ->end()
         ;
 

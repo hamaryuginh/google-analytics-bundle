@@ -22,6 +22,10 @@ class HamaryuginhGoogleAnalyticsExtension extends Extension
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
 
+        $container->setParameter('ga_tracking', $config);
+        $container->setParameter('ga_tracking.account', $config['account']);
+        $container->setParameter('ga_tracking.debug', $config['debug']);
+
         $loader = new Loader\XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.xml');
     }

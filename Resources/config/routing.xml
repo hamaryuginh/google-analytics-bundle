@@ -4,7 +4,7 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
 
-    <route id="hamaryuginh_google_analytics_homepage" path="/hello/{name}">
-        <default key="_controller">HamaryuginhGoogleAnalyticsBundle:Default:index</default>
+    <route id="hamaryuginh_ga_render" path="/ga/render">
+        <default key="_controller">HamaryuginhGoogleAnalyticsBundle:GA:render</default>
     </route>
 </routes>
