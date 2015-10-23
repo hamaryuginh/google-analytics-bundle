@@ -165,6 +165,10 @@ p img {
 code, pre {
   font-family: Monaco, "Bitstream Vera Sans Mono", "Lucida Console", Terminal, monospace;
   color:#000;
+  font-size: 14px;
+}
+
+code {
   font-size: 13px;
   background-color: antiquewhite;
   padding: 3px 4px;
@@ -179,6 +183,12 @@ pre {
   overflow: auto;
   overflow-y: hidden;
 	margin-bottom: 32px;
+}
+
+pre code {
+  background-color: transparent;
+  font-size: 14px;
+  padding: 0;
 }
 
 
