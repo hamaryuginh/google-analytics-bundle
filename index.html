@@ -1,0 +1,184 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Google Analytics Bundle by hamaryuginh</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/github-light.css">
+    <script src="javascripts/scale.fix.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1 class="header">Google Analytics Bundle</h1>
+        <p class="header"></p>
+
+        <ul>
+          <li class="download"><a class="buttons" href="https://github.com/hamaryuginh/google-analytics-bundle/zipball/master">Download ZIP</a></li>
+          <li class="download"><a class="buttons" href="https://github.com/hamaryuginh/google-analytics-bundle/tarball/master">Download TAR</a></li>
+          <li><a class="buttons github" href="https://github.com/hamaryuginh/google-analytics-bundle">View On GitHub</a></li>
+        </ul>
+
+        <p class="header">This project is maintained by <a class="header name" href="https://github.com/hamaryuginh">hamaryuginh</a></p>
+
+
+      </header>
+      <section>
+        <h1>
+<a id="googleanalyticsbundle" class="anchor" href="#googleanalyticsbundle" aria-hidden="true"><span class="octicon octicon-link"></span></a>GoogleAnalyticsBundle</h1>
+
+<p><em>Work in progress</em></p>
+
+<p>This <a href="https://symfony.com/">Symfony</a> bundle will simplify the management of interactions with google analytics.</p>
+
+<h1>
+<a id="installation" class="anchor" href="#installation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Installation</h1>
+
+<p>Install <a href="https://getcomposer.org/">composer</a></p>
+
+<p>Add the following to your require block in composer.json config</p>
+
+<pre><code>"hamaryuginh/google-analytics-bundle": "dev-master"
+</code></pre>
+
+<p>Then, execute the following command in your symfony poject root</p>
+
+<pre><code>$ composer install
+</code></pre>
+
+<h1>
+<a id="configuration" class="anchor" href="#configuration" aria-hidden="true"><span class="octicon octicon-link"></span></a>Configuration</h1>
+
+<p>Register the bundle in <code>app/AppKernel.php</code>:</p>
+
+<div class="highlight highlight-text-html-php"><pre><span class="pl-s1"><span class="pl-k">public</span> <span class="pl-k">function</span> <span class="pl-en">registerBundles</span>()</span>
+<span class="pl-s1">{</span>
+<span class="pl-s1">    <span class="pl-k">...</span></span>
+<span class="pl-s1">    <span class="pl-k">new</span> <span class="pl-c1">Hamaryuginh\GoogleAnalyticsBundle\</span><span class="pl-c1">HamaryuginhGoogleAnalyticsBundle</span>(),</span>
+<span class="pl-s1">    <span class="pl-k">...</span></span>
+<span class="pl-s1">}</span></pre></div>
+
+<p>Add to your <code>app/config/config.yml</code> the following:</p>
+
+<div class="highlight highlight-source-yaml"><pre><span class="pl-s"><span class="pl-ent">hamaryuginh_google_analytics:</span></span>
+    <span class="pl-s"><span class="pl-ent">account:</span> <span class="pl-s">UA-XXXXXX-Y   </span></span><span class="pl-c"># Your GA account ID</span>
+    <span class="pl-s"><span class="pl-ent">debug:</span>   <span class="pl-s">false         </span></span><span class="pl-c"># [Facultative] set to true to activate debug mode</span></pre></div>
+
+<p>Add to your <code>app/config/routing.yml</code> the following:</p>
+
+<div class="highlight highlight-source-yaml"><pre><span class="pl-s"><span class="pl-ent">hamaryuginh_google_analytics:</span></span>
+    <span class="pl-s"><span class="pl-ent">resource:</span> <span class="pl-s"><span class="pl-pds">"</span>@HamaryuginhGoogleAnalyticsBundle/Resources/config/routing.xml<span class="pl-pds">"</span></span></span>
+    <span class="pl-s"><span class="pl-ent">prefix:</span>   <span class="pl-s">/</span></span></pre></div>
+
+<p>Add the following before <code>&lt;/head&gt;</code> tag:</p>
+
+<div class="highlight highlight-text-html-twig"><pre>{{ render(controller(<span class="pl-s"><span class="pl-pds">'</span>HamaryuginhGoogleAnalyticsBundle:GA:render<span class="pl-pds">'</span></span>)) }}</pre></div>
+
+<p>At the end of your document, before the <code>&lt;/body&gt;</code> tag, add:</p>
+
+<div class="highlight highlight-text-html-basic"><pre><span class="pl-s1">&lt;<span class="pl-ent">script</span> <span class="pl-e">type</span>=<span class="pl-s"><span class="pl-pds">"</span>text/javascript<span class="pl-pds">"</span></span>&gt;</span>
+<span class="pl-s1">    gat.<span class="pl-c1">go</span>();</span>
+<span class="pl-s1">&lt;/<span class="pl-ent">script</span>&gt;</span></pre></div>
+
+<h1>
+<a id="usage" class="anchor" href="#usage" aria-hidden="true"><span class="octicon octicon-link"></span></a>Usage</h1>
+
+<p>Globally, you define a <code>data-ga-xxx</code> attribute on any tag and you give arguments as JSON string (ex: <code>data-ga-page="{'page':'/home'}"</code>)</p>
+
+<p><strong>Page tracking</strong></p>
+
+<p>Add <code>data-ga-page</code> attribute on <code>&lt;body&gt;</code> tag or any other tag:</p>
+
+<div class="highlight highlight-text-html-basic"><pre>&lt;<span class="pl-ent">body</span> <span class="pl-e">data-ga-page</span>=<span class="pl-s"><span class="pl-pds">"</span>{'page':'/home'}<span class="pl-pds">"</span></span>&gt;
+  ...
+&lt;/<span class="pl-ent">body</span>&gt;</pre></div>
+
+<p>Or:</p>
+
+<div class="highlight highlight-text-html-basic"><pre>&lt;<span class="pl-ent">body</span>&gt;
+  ...
+  &lt;<span class="pl-ent">div</span> <span class="pl-e">data-ga-page</span>=<span class="pl-s"><span class="pl-pds">"</span>{'page':'/home'}<span class="pl-pds">"</span></span>&gt;&lt;/<span class="pl-ent">div</span>&gt;
+  ...
+&lt;/<span class="pl-ent">body</span>&gt;</pre></div>
+
+<p>Or whatever you want...</p>
+
+<blockquote>
+<p><strong>Warning!</strong> <code>data-ga-page</code> must be defined only <strong>once</strong> per document !</p>
+</blockquote>
+
+<p>For further information, take a look at the <a href="https://developers.google.com/analytics/devguides/collection/analyticsjs/pages">Page tracking</a> documentation.</p>
+
+<p><strong>Custom dimentions and metrics</strong></p>
+
+<p>Add <code>data-ga-dimension</code> attribute on any tag:</p>
+
+<div class="highlight highlight-text-html-basic"><pre>&lt;<span class="pl-ent">body</span>&gt;
+  ...
+  &lt;<span class="pl-ent">div</span> <span class="pl-e">data-ga-dimension</span>=<span class="pl-s"><span class="pl-pds">"</span>{'index':1, 'value':'Hello'}<span class="pl-pds">"</span></span>&gt;&lt;/<span class="pl-ent">div</span>&gt;
+  &lt;<span class="pl-ent">div</span> <span class="pl-e">data-ga-dimension</span>=<span class="pl-s"><span class="pl-pds">"</span>{'index':2, 'value':'World!!!'}<span class="pl-pds">"</span></span>&gt;&lt;/<span class="pl-ent">div</span>&gt;
+  ...
+  &lt;<span class="pl-ent">div</span> <span class="pl-e">data-ga-metric</span>=<span class="pl-s"><span class="pl-pds">"</span>{'index':18, 'value':8000}<span class="pl-pds">"</span></span>&gt;&lt;/<span class="pl-ent">div</span>&gt;
+  &lt;<span class="pl-ent">div</span> <span class="pl-e">data-ga-metric</span>=<span class="pl-s"><span class="pl-pds">"</span>{'index':19, 'value':24.99}<span class="pl-pds">"</span></span>&gt;&lt;/<span class="pl-ent">div</span>&gt;
+  ...
+&lt;/<span class="pl-ent">body</span>&gt;</pre></div>
+
+<p>For further information, take a look at the <a href="https://developers.google.com/analytics/devguides/collection/analyticsjs/custom-dims-mets">Custom dimensions and metrics</a> documentation.</p>
+
+<p><strong>Event tracking (only "click" event at the moment)</strong></p>
+
+<p>Add <code>data-ga-event</code> attribute on any tag:</p>
+
+<div class="highlight highlight-text-html-basic"><pre>&lt;<span class="pl-ent">body</span>&gt;
+  ...
+  &lt;<span class="pl-ent">a</span> <span class="pl-e">href</span>=<span class="pl-s"><span class="pl-pds">"</span>#<span class="pl-pds">"</span></span> <span class="pl-e">data-ga-event</span>=<span class="pl-s"><span class="pl-pds">"</span>{'eventCategory':'Link','eventAction':'click','eventLabel':'link 1'}<span class="pl-pds">"</span></span>&gt;Home&lt;/<span class="pl-ent">a</span>&gt;
+  ...
+  &lt;<span class="pl-ent">div</span> <span class="pl-e">data-ga-event</span>=<span class="pl-s"><span class="pl-pds">"</span>{'eventCategory':'Element','eventAction':'click','eventLabel':'On div'}<span class="pl-pds">"</span></span>&gt;&lt;/<span class="pl-ent">div</span>&gt;
+  ...
+&lt;/<span class="pl-ent">body</span>&gt;</pre></div>
+
+<p>For further information, take a look at the <a href="https://developers.google.com/analytics/devguides/collection/analyticsjs/events">Event tracking</a> documentation.</p>
+
+<p><strong>Last but not least</strong></p>
+
+<p>Obviously, you can still use the <strong>Google Analytics</strong> library by the default way:</p>
+
+<div class="highlight highlight-text-html-basic"><pre><span class="pl-s1">&lt;<span class="pl-ent">script</span> <span class="pl-e">type</span>=<span class="pl-s"><span class="pl-pds">"</span>text/javascript<span class="pl-pds">"</span></span>&gt;</span>
+<span class="pl-s1">  ga(<span class="pl-s"><span class="pl-pds">'</span>set<span class="pl-pds">'</span></span>, <span class="pl-s"><span class="pl-pds">'</span>dimension1<span class="pl-pds">'</span></span>, <span class="pl-s"><span class="pl-pds">'</span>toto<span class="pl-pds">'</span></span>);</span>
+<span class="pl-s1">  ...</span>
+<span class="pl-s1">  ga(<span class="pl-s"><span class="pl-pds">'</span>send<span class="pl-pds">'</span></span>, <span class="pl-s"><span class="pl-pds">'</span>event<span class="pl-pds">'</span></span>, ...);</span>
+<span class="pl-s1">  ...</span>
+<span class="pl-s1">  ga(<span class="pl-s"><span class="pl-pds">'</span>send<span class="pl-pds">'</span></span>, <span class="pl-s"><span class="pl-pds">'</span>pageview<span class="pl-pds">'</span></span>);</span>
+<span class="pl-s1">&lt;/<span class="pl-ent">script</span>&gt;</span></pre></div>
+
+<p><strong>Have fun!</strong></p>
+
+<h1>
+<a id="contributions" class="anchor" href="#contributions" aria-hidden="true"><span class="octicon octicon-link"></span></a>Contributions</h1>
+
+<p>Feel free to open an issue or add a pull request.</p>
+      </section>
+      <footer>
+        <p><small>Hosted on <a href="https://pages.github.com">GitHub Pages</a> using the Dinky theme</small></p>
+      </footer>
+    </div>
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+		          <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-69091522-3");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
+  </body>
+</html>
