@@ -65,6 +65,12 @@ At the end of your document, before the `</body>` tag, add:
 </script>
 ```
 
+Install assets (from your symfony project root):
+
+```bash
+$ php app/console assets:install --symlink
+```
+
 
 # Usage
 
