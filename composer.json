@@ -2,6 +2,7 @@
   "name": "hamaryuginh/google-analytics-bundle",
   "description": "Symfony2 Google Analytics Bundle",
   "type": "symfony-bundle",
+  "license": "MIT",
   "authors": [{
     "name": "Hamaryuginh",
     "email": "hamaryuginh@gmail.com"
