@@ -1,6 +1,8 @@
 # GoogleAnalyticsBundle
 
-Work in progress
+_Work in progress_
+
+This [Symfony](https://symfony.com/) bundle will simplify the management of interactions with google analytics.
 
 
 # Installation
@@ -127,6 +129,21 @@ Add `data-ga-event` attribute on any tag:
 ```
 
 For further information, take a look at the [Event tracking](https://developers.google.com/analytics/devguides/collection/analyticsjs/events) documentation.
+
+__aa__
+
+Obviously, you can still use the **Google Analytics** library by the default way:
+
+```html
+<script type="text/javascript">
+  ga('set', 'dimension1', 'toto');
+  ...
+  ga('send', 'event', ...);
+  ...
+  ga('send', 'pageview');
+</script>
+```
+
 
 __Have fun!__
 
