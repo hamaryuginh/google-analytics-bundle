@@ -130,7 +130,7 @@ Add `data-ga-event` attribute on any tag:
 
 For further information, take a look at the [Event tracking](https://developers.google.com/analytics/devguides/collection/analyticsjs/events) documentation.
 
-__aa__
+__Last but not least__
 
 Obviously, you can still use the **Google Analytics** library by the default way:
 
