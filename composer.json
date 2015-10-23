@@ -1,6 +1,7 @@
 {
   "name": "hamaryuginh/google-analytics-bundle",
   "description": "Symfony2 Google Analytics Bundle",
+  "homepage": "http://hamaryuginh.github.io/google-analytics-bundle/",
   "type": "symfony-bundle",
   "license": "MIT",
   "authors": [{
