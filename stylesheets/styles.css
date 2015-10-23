@@ -163,9 +163,12 @@ p img {
 /* Code blocks */
 
 code, pre {
-	font-family: Monaco, "Bitstream Vera Sans Mono", "Lucida Console", Terminal, monospace;
+  font-family: Monaco, "Bitstream Vera Sans Mono", "Lucida Console", Terminal, monospace;
   color:#000;
-  font-size:14px;
+  font-size: 13px;
+  background-color: antiquewhite;
+  padding: 3px 4px;
+  border-radius: 2px;
 }
 
 pre {
@@ -233,7 +236,7 @@ header {
 }
 
 p.header {
-	font-size: 16px;
+	font-size: 14px;
 }
 
 h1.header {
