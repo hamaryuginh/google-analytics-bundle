@@ -8,7 +8,10 @@ gat.strings={
   _def_ga_value_attr: '=> You must define "value" attribute',
   _def_ga_value_nan: '=> You must provide a number for "value" attribute',
   _def_ga_event_category_attr: '=> You must define "eventCategory" attribute',
-  _def_ga_event_action_attr: '=> You must define "eventAction" attribute'
+  _def_ga_event_action_attr: '=> You must define "eventAction" attribute',
+  _def_ga_social_network_attr: '=> You must define "socialNetwork" attribute',
+  _def_ga_social_action_attr: '=> You must define "socialAction" attribute',
+  _def_ga_social_target_attr: '=> You must define "socialTarget" attribute'
 };
 
 gat.init=function(account, debug){
@@ -26,7 +29,7 @@ gat.init=function(account, debug){
 gat.go=function(){
   // handle data-ga-xxx attributes
   (function(f,a,b,i,e,n){
-    var na,nb,nc;
+    var na,nb,nc,nd;
     // Page
     n=a.querySelectorAll('[data-ga-page]');
     if (n.length>1) {
@@ -77,7 +80,7 @@ gat.go=function(){
 
     // Events
     n=a.querySelectorAll('[data-ga-event]');
-    for(i=0;i< n.length;i++) {
+    for(i=0;i<n.length;i++) {
       nc=JSON.parse(n[i].getAttribute('data-ga-event').replace(/'/g,'"'));
       nc['hitType']='event';
       if (undefined==nc['eventCategory']){
@@ -94,6 +97,33 @@ gat.go=function(){
       n[i].addEventListener('click',(function(inc){
         return function(ev){ev.preventDefault();ga('send',inc)}
       })(nc));
+    }
+
+    // Social (for homemade social buttons)
+    n=a.querySelectorAll('[data-ga-social]');
+    for(i=0;i<n.length;i++) {
+      nd=JSON.parse(n[i].getAttribute('data-ga-social').replace(/'/g,'"'));
+      nd['hitType']='social';
+      if (undefined==nd['socialNetwork']){
+        throw b.strings._def_ga_social_network_attr
+      }
+      if (undefined==nd['socialAction']){
+        throw b.strings._def_ga_social_action_attr
+      }
+      if (undefined==nd['socialTarget']){
+        throw b.strings._def_ga_social_target_attr
+      }
+      n[i].addEventListener('click',(function(inc){
+        return function(ev){
+          var _this = this;
+          if(!_this.hasAttribute('ga-social-done')){
+            ev.preventDefault();
+            ga('send',inc);
+            _this.setAttribute('ga-social-done','1');
+            setTimeout(function(){_this.click();_this.removeAttribute('ga-social-done')},100);
+          }
+        }
+      })(nd));
     }
   })(window, document, this);
 

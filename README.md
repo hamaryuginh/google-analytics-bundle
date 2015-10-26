@@ -136,6 +136,22 @@ Add `data-ga-event` attribute on any tag:
 
 For further information, take a look at the [Event tracking](https://developers.google.com/analytics/devguides/collection/analyticsjs/events) documentation.
 
+__Social interactions (only homemade social buttons at the moment)__
+
+Add `data-ga-social` attribute on any tag:
+
+```html
+<body>
+  ...
+  <a href="http://example.com/hello" target="_blank" data-ga-social="{'socialNetwork':'facebook','socialAction':'like','socialTarget':'http://example.com/hello'}">
+    <img src="facebook.png" alt="Facebook">
+  </a>
+  ...
+</body>
+```
+
+For further information, take a look at the [Social interactions](https://developers.google.com/analytics/devguides/collection/analyticsjs/social-interactions) documentation.
+
 __Last but not least__
 
 Obviously, you can still use the **Google Analytics** library by the default way:
