@@ -4,7 +4,8 @@ gat.strings={
   _def_account: '=> You must define "account" parameter',
   _def_ga_page: '=> attribute "data-ga-page" must be defined once per document',
   _def_attr_tmpl: '=> You must define "%attr%" attribute for data-ga-%prop% property',
-  _def_type_tmpl: '=> Attribute "%attr%" must be of type "%type%"'
+  _def_type_tmpl: '=> Attribute "%attr%" must be of type "%type%"',
+  _def_card_tmpl: '=> Attribute "%attr%" must be defined "%times%" per document'
 };
 
 gat.attrError=function(prop, attr){
@@ -13,12 +14,30 @@ gat.attrError=function(prop, attr){
 gat.typeError=function(type, attr){
   throw this.strings._def_type_tmpl.replace('%type%', type).replace('%attr%', attr);
 };
+gat.cardError=function(times, attr){
+  var timesString = '';
+  switch (times) {
+    case 0:
+      timesString = 'no time';
+      break;
+    case 1:
+      timesString = 'once';
+      break;
+    case 'n':
+    case 'N':
+      timesString = 'several times';
+      break;
+    default:
+      timesString = times + ' times';
+  }
+  throw this.strings._def_card_tmpl.replace('%times%', timesString).replace('%attr%', attr);
+};
 
 gat.init=function(account, debug){
   if(undefined==account){
     throw this.strings._def_account
   }
-  debug=(debug==undefined?'':'_debug');
+  debug=(debug==undefined||debug==false?'':'_debug');
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
     m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
@@ -37,6 +56,7 @@ gat.go=function(){
       page:{
         required: ['page'],
         optional: ['location','title'],
+        cardinality: 1,
         init: function(el){
           el.ga_data.hitType = 'page';
           ga('set', el.ga_data)
@@ -118,6 +138,10 @@ gat.go=function(){
       if (!__l.hasOwnProperty(key)) return;
       var __ld = __l[key];
       var __n = a.querySelectorAll('[data-ga-'+key+']');
+      // Check cardinality
+      if (undefined !== __ld.cardinality && __n.length > __ld.cardinality) {
+        b.cardError(__ld.cardinality, key);
+      }
       for (var j=0; j<__n.length; j++) {
         (function(el,dat,prop) {
           // Get ga-data
