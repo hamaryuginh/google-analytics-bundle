@@ -41,6 +41,7 @@ Add to your `app/config/config.yml` the following:
 hamaryuginh_google_analytics:
     account: UA-XXXXXX-Y   # Your GA account ID
     debug:   false         # [Facultative] set to true to activate debug mode
+    enabled: false         # Enable or disable tracking
 ```
 
 Add to your `app/config/routing.yml` the following:
@@ -59,10 +60,8 @@ Add the following before `</head>` tag:
 
 At the end of your document, before the `</body>` tag, add:
 
-```html
-<script type="text/javascript">
-    gat.go();
-</script>
+```twig
+{{ render(controller('HamaryuginhGoogleAnalyticsBundle:GA:renderStart')) }}
 ```
 
 Install assets (from your symfony project root):
