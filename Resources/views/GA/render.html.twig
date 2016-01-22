@@ -1,7 +1,14 @@
-{#<!-- Google Analytics -->#}
-<script src="{{ asset('bundles/hamaryuginhgoogleanalytics/js/tracking.min.js') }}"></script>
-{#<script src="{{ asset('bundles/hamaryuginhgoogleanalytics/js/tracking.js') }}"></script>#}
-<script type="text/javascript">
-    gat.init('{{ account }}', {{ debug ? 'true' : 'false' }});
-</script>
-{#<!-- End Google Analytics -->#}
+{% extends "HamaryuginhGoogleAnalyticsBundle:Global:render.html.twig" %}
+
+{% block script %}
+
+    {#<!-- Google Analytics -->#}
+    <script src="{{ asset('bundles/hamaryuginhgoogleanalytics/js/tracking.min.js') }}"></script>
+    {#<script src="{{ asset('bundles/hamaryuginhgoogleanalytics/js/tracking.js') }}"></script>#}
+    <script type="text/javascript">
+        gat.init('{{ account }}', {{ debug ? 'true' : 'false' }});
+    </script>
+    {#<!-- End Google Analytics -->#}
+
+
+{% endblock %}

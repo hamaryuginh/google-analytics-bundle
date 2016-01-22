@@ -28,6 +28,9 @@ class Configuration implements ConfigurationInterface
                 ->booleanNode('debug')
                     ->defaultValue(false)
                 ->end()
+                ->booleanNode('enabled')
+                    ->defaultValue(true)
+                ->end()
             ->end()
         ;
 
