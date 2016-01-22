@@ -13,6 +13,17 @@ class GAController extends Controller
             array(
                 'account' => $this->getParameter('ga_tracking.account'),
                 'debug'   => $this->getParameter('ga_tracking.debug'),
+                'enabled'   => $this->getParameter('ga_tracking.enabled'),
+            )
+        );
+    }
+
+    public function renderStartAction()
+    {
+        return $this->render(
+            'HamaryuginhGoogleAnalyticsBundle:GA:start_ga.html.twig',
+            array(
+                'enabled'   => $this->getParameter('ga_tracking.enabled'),
             )
         );
     }
