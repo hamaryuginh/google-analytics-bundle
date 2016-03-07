@@ -13,4 +13,18 @@
         </service>
     </services>
     -->
+    <services>
+    <service id="hamaryuginh_google_analytics.ga_extension"
+        class="Hamaryuginh\GoogleAnalyticsBundle\Twig\GAExtension"
+        public="false">
+        <argument type="service" id="twig" />
+        <argument type="collection">
+            <argument key="account">%ga_tracking.account%</argument>
+            <argument key="debug">%ga_tracking.debug%</argument>
+            <argument key="enabled">%ga_tracking.enabled%</argument>
+        </argument>
+        <tag name="twig.extension" />
+    </service>
+</services>
+
 </container>
