@@ -44,24 +44,17 @@ hamaryuginh_google_analytics:
     enabled: false         # Enable or disable tracking
 ```
 
-Add to your `app/config/routing.yml` the following:
-
-```yaml
-hamaryuginh_google_analytics:
-    resource: "@HamaryuginhGoogleAnalyticsBundle/Resources/config/routing.xml"
-    prefix:   /
-```
 
 Add the following before `</head>` tag:
 
 ```twig
-{{ render(controller('HamaryuginhGoogleAnalyticsBundle:GA:render')) }}
+{{ ga_initialize()|raw }}
 ```
 
 At the end of your document, before the `</body>` tag, add:
 
 ```twig
-{{ render(controller('HamaryuginhGoogleAnalyticsBundle:GA:renderStart')) }}
+{{ ga_start()|raw }}
 ```
 
 Install assets (from your symfony project root):
