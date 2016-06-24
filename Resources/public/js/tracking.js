@@ -90,13 +90,13 @@ gat.go=function(){
         optional: ['eventLabel','eventValue'],
         init: function(el){
           el.ga_data.hitType = 'event';
-          el.ga_data.hitCallback = (function(el){
-            if (el.href||el.getAttribute('data-url')) {
-              f.location=el.href||el.getAttribute('data-url')
-            }
-          }).bind(null,el);
+          //el.ga_data.hitCallback = (function(el){
+          //  if (el.href||el.getAttribute('data-url')) {
+          //    f.location=el.href||el.getAttribute('data-url')
+          //  }
+          //}).bind(null,el);
           el.addEventListener('click',(function(gad){
-            return function(e){e.preventDefault();ga('send',gad)}
+            return function(e){ga('send',gad)}
           })(el.ga_data))
         }
       },
