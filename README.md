@@ -48,13 +48,13 @@ hamaryuginh_google_analytics:
 Add the following before `</head>` tag:
 
 ```twig
-{{ ga_initialize()|raw }}
+{{ ga_initialize() }}
 ```
 
 At the end of your document, before the `</body>` tag, add:
 
 ```twig
-{{ ga_start()|raw }}
+{{ ga_start() }}
 ```
 
 Install assets (from your symfony project root):
