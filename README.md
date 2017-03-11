@@ -48,13 +48,13 @@ hamaryuginh_google_analytics:
 Add the following before `</head>` tag:
 
 ```twig
-{{ ga_initialize()|raw }}
+{{ ga_initialize() }}
 ```
 
 At the end of your document, before the `</body>` tag, add:
 
 ```twig
-{{ ga_start()|raw }}
+{{ ga_start() }}
 ```
 
 Install assets (from your symfony project root):
@@ -156,6 +156,45 @@ Obviously, you can still use the **Google Analytics** library by the default way
   ...
   ga('send', 'pageview');
 </script>
+```
+
+# Ecommerce usage
+
+__1. Start the ecommerce tracking__  
+
+Be sure to only declare this once and AFTER initializing the GA tracker (see Configuration)
+```twig
+{{ ga_ecommerce_initialize() }}
+```
+
+__2. Add a transaction__  
+
+A transaction is like a basket
+```twig
+{{ ga_ecommerce_addTransaction('transactionid',
+                            'affiliation',
+                            'totalAmount',
+                            'shipping',
+                            'taxRate') }}
+```
+
+__3.Add an item to the transaction__  
+
+An item is a product in your basket. Add as many items in your transaction as you want.
+```twig
+{{ ga_ecommerce_addItem('transactionId',
+                        'productName',
+                        'sku',
+                        'category',
+                        'price',
+                        'quantity') }}
+```
+
+__4. Send the transaction to GA__  
+
+Call this after having added all the items to the transaction.
+```twig
+{{ ga_ecommerce_send() }}
 ```
 
 
